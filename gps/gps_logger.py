@@ -11,7 +11,10 @@ def getPositionData(gps):
         latitude = getattr(nx,'lat', "Unknown")
         longitude = getattr(nx,'lon', "Unknown")
         altitude = getattr(nx, 'alt', "Unknown")
-    return (latitude, longitude, altitude)
+        return (latitude, longitude, altitude)
+    else:
+        print("GPS error")
+        return (0,0,0)
 
 if __name__=='__main__':
     parser = argparse.ArgumentParser(description='Log GPS data to csv file.')
