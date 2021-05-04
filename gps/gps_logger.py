@@ -13,7 +13,7 @@ def getPositionData(gps):
         altitude = getattr(nx, 'alt', "Unknown")
         return (latitude, longitude, altitude)
     else:
-        print("GPS error")
+        #print("GPS error")
         return (-1000,-1000,-1000)
 
 if __name__=='__main__':
@@ -39,4 +39,5 @@ if __name__=='__main__':
                     time.sleep(1.0)
         except (KeyboardInterrupt):
             running = False
+            csvfile.close()
             print("Application closed!")
