@@ -1,0 +1,6 @@
+[submodule "direwolf"]
+	path = direwolf
+	url = https://github.com/wb2osz/direwolf
+[submodule "MS5607"]
+	path = MS5607
+	url = https://github.com/psheridan1979/MS5607
