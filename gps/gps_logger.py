@@ -14,7 +14,7 @@ def getPositionData(gps):
         return (latitude, longitude, altitude)
     else:
         print("GPS error")
-        return (0,0,0)
+        return (-1000,-1000,-1000)
 
 if __name__=='__main__':
     parser = argparse.ArgumentParser(description='Log GPS data to csv file.')
@@ -28,16 +28,15 @@ if __name__=='__main__':
         try:
             gpsd = gps(mode=WATCH_ENABLE|WATCH_NEWSTYLE)
             print("Waiting for GPS to initialize")
-            nx = gpsd.next()
-            while nx['class'] != 'TPV':
-                nx = gpsd.next()
+            time.sleep(5.0)
             print("Application started!")
             running = True
             while running:
                 [latitude,longitude,altitude] = getPositionData(gpsd)
-                print("Your position: lon = " + str(longitude) + ", lat = " + str(latitude) + ", alt = " + str(altitude))
-                writer.writerow([time.time(),latitude,longitude,altitude])
-                time.sleep(1.0)
+                if latitude != -1000:
+                    print("Your position: lon = " + str(longitude) + ", lat = " + str(latitude) + ", alt = " + str(altitude))
+                    writer.writerow([time.time(),latitude,longitude,altitude])
+                    time.sleep(1.0)
         except (KeyboardInterrupt):
             running = False
             print("Application closed!")
