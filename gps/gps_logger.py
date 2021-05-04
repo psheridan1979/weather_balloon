@@ -1,8 +1,7 @@
 from gps import *
 import time
 import argparse
-
-running = True
+import csv
 
 def getPositionData(gps):
     nx = gpsd.next()
@@ -11,23 +10,27 @@ def getPositionData(gps):
     if nx['class'] == 'TPV':
         latitude = getattr(nx,'lat', "Unknown")
         longitude = getattr(nx,'lon', "Unknown")
-        print "Your position: lon = " + str(longitude) + ", lat = " + str(latitude)
-
-	gpsd = gps(mode=WATCH_ENABLE|WATCH_NEWSTYLE)
-
-try:
-    print "Application started!"
-    while running:
-        getPositionData(gpsd)
-        time.sleep(1.0)
-
-except (KeyboardInterrupt):
-    running = False
-    print "Applications closed!"
+        altitude = getattr(nx, 'alt', "Unknown")
+    return (latitude, longitude, altitude)
 
 if __name__=='__main__':
-	import argparse
-	parser = argparse.ArgumentParser()
-	parser.add_argument("square", help="display a square of a given number", type=int)
-	args = parser.parse_args()
-	print(args.square**2)
+    parser = argparse.ArgumentParser()
+    parser.add_argument("log_file", help="the path to write the log to", type=str, default="../logs/gps.csv")
+    args = parser.parse_args()
+    print(args.log_file)
+    file_path = args.log_file
+    with open(file_path, 'wb') as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(['Time','Lat', 'Lon','Alt(M)'])
+        try:
+            gpsd = gps(mode=WATCH_ENABLE|WATCH_NEWSTYLE)
+            print("Application started!")
+            running = True
+            while running:
+                [latitude,longitude,altitude] = getPositionData(gpsd)
+                print("Your position: lon = " + str(longitude) + ", lat = " + str(latitude) + ", alt = " + str(altitude))
+                writer.writerow([time.time(),latitude,longitude,altitude])
+                time.sleep(1.0)
+        except (KeyboardInterrupt):
+            running = False
+            print("Application closed!")
