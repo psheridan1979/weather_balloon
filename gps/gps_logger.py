@@ -14,8 +14,8 @@ def getPositionData(gps):
     return (latitude, longitude, altitude)
 
 if __name__=='__main__':
-    parser = argparse.ArgumentParser()
-    parser.add_argument("log_file", help="the path to write the log to", type=str, default="../logs/gps.csv")
+    parser = argparse.ArgumentParser(description='Log GPS data to csv file.')
+    parser.add_argument("--log_file", help="the path to write the log to", type=str, default="../logs/gps.csv")
     args = parser.parse_args()
     print(args.log_file)
     file_path = args.log_file
