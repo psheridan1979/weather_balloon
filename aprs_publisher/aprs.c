@@ -339,10 +339,10 @@ void SendAPRS(struct TGPS *GPS, char *aprs_callsign)
 	
     ax25_frame(frames[0], &lengths[0],
 		aprs_callsign,
-		0,
+		11,
 		APRS_DEVID, 0,
-		(GPS->Altitude > 0) ? 0 : 1,	
-		(GPS->Altitude > 0) ? 0 : 1,
+		1,	
+		1,
 		"!/%s%sO   /A=%06ld|%s|%s",
 		ax25_base91enc(slat, 4, aprs_lat),
 		ax25_base91enc(slng, 4, aprs_lon),
