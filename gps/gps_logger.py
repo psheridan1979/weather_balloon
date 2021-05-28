@@ -19,7 +19,7 @@ def getPositionData(gps):
 if __name__=='__main__':
     parser = argparse.ArgumentParser(description='Log GPS data to csv file.')
     parser.add_argument("--log_file", help="the path to write the log to", type=str, default="../logs/gps.csv")
-    parser.add_argument("--current_file" help="the path to write the most recent data to", type=str, default="../logs/current.csv")
+    parser.add_argument("--current_file", help="the path to write the most recent data to", type=str, default="../logs/current.csv")
     parser.add_argument("--interval", help="interval between log entries in seconds", type=float, default=5.0)
     args = parser.parse_args()
     file_path = args.log_file
