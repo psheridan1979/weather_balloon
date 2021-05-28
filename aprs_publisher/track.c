@@ -32,7 +32,7 @@ int main()
          if ((fd = fopen(file_path, "r")) != NULL)
          {
             fgets(line, MAX_LINE_LENGTH, fd );
-            if (line)
+            if (line[0] != '\0')
             {
                printf(line);
                char *line_duplicate = strdup(line);
@@ -59,7 +59,6 @@ int main()
          }
          if (remove(file_path) == 0)  printf("Deleted successfully\n");
          else printf("Could not delete file\n");
-         exit(0);
       }
    return(1);
 }
