@@ -22,7 +22,7 @@ const char* getfield(char* line, int num)
 
 int main()
 {
-   char *file_path = "../logs/current.csv";
+   char file_path[] = "../logs/current.csv";
    FILE *fd;
    
       char line[MAX_LINE_LENGTH] = {0};
@@ -57,6 +57,7 @@ int main()
          }
          if (remove(file_path) == 0)  printf("Deleted successfully\n");
          else printf("Could not delete file\n");
+         exit(0);
       }
    return(1);
 }
