@@ -32,27 +32,29 @@ int main()
          if ((fd = fopen(file_path, "r")) != NULL)
          {
             fgets(line, MAX_LINE_LENGTH, fd );
-            printf(line);
-            char *line_duplicate = strdup(line);
-            const char *time = getfield(line_duplicate, 1);
-            line_duplicate = strdup(line);
-            const char *lat = getfield(line_duplicate, 2);
-            line_duplicate = strdup(line);
-            const char *lon = getfield(line_duplicate, 3);
-            line_duplicate = strdup(line);
-            const char *alt = getfield(line_duplicate, 4);
-            printf("Time: %s\n", time);
-            printf("Lat: %s\n", lat);
-            printf("Lon: %s\n", lon);
-            printf("Lon: %s\n", lon);
+            if (line)
+            {
+               printf(line);
+               char *line_duplicate = strdup(line);
+               const char *time = getfield(line_duplicate, 1);
+               line_duplicate = strdup(line);
+               const char *lat = getfield(line_duplicate, 2);
+               line_duplicate = strdup(line);
+               const char *lon = getfield(line_duplicate, 3);
+               line_duplicate = strdup(line);
+               const char *alt = getfield(line_duplicate, 4);
+               printf("Time: %s\n", time);
+               printf("Lat: %s\n", lat);
+               printf("Lon: %s\n", lon);
+               printf("Lon: %s\n", lon);
 
-            struct TGPS GPS;
-            char *ptr;
-            GPS.Altitude = atoi(alt);
-            GPS.Latitude = strtod(lat, &ptr);
-            GPS.Longitude = strtod(lon, &ptr);
-            GPS.EpochTime = atoi(time);
-
+               struct TGPS GPS;
+               char *ptr;
+               GPS.Altitude = atoi(alt);
+               GPS.Latitude = strtod(lat, &ptr);
+               GPS.Longitude = strtod(lon, &ptr);
+               GPS.EpochTime = atoi(time);
+            }
             fclose(fd);
          }
          if (remove(file_path) == 0)  printf("Deleted successfully\n");
