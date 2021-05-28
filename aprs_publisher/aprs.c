@@ -356,7 +356,7 @@ void SendAPRS(struct TGPS *GPS, char *aprs_callsign)
 		// aprs_alt, stlm, comment, Config.APRS_Callsign, Count);
 		
 			
-	makeafsk(48000, 1200, 1200, 2200, frames, lengths, message_count, total_length);
+	makeafsk(44100, 1200, 1200, 2200, frames, lengths, message_count, total_length);
 }
 
 
