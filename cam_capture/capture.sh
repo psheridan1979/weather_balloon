@@ -11,6 +11,7 @@ do
 done
 
 echo "Path: $path";
+echo "Interval: $time";
 
 
 while true

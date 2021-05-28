@@ -19,9 +19,12 @@ def getPositionData(gps):
 if __name__=='__main__':
     parser = argparse.ArgumentParser(description='Log GPS data to csv file.')
     parser.add_argument("--log_file", help="the path to write the log to", type=str, default="../logs/gps.csv")
+    parser.add_argument("--current_file" help="the path to write the most recent data to", type=str, default="../logs/current.csv")
+    parser.add_argument("--interval", help="interval between log entries in seconds", type=float, default=5.0)
     args = parser.parse_args()
-    print(args.log_file)
     file_path = args.log_file
+    aprs_path = args.current_file
+    interval = args.interval
     with open(file_path, 'wb') as csvfile:
         writer = csv.writer(csvfile)
         writer.writerow(['Time','Lat', 'Lon','Alt(M)'])
@@ -32,11 +35,14 @@ if __name__=='__main__':
             print("Application started!")
             running = True
             while running:
-                [latitude,longitude,altitude] = getPositionData(gpsd)
-                if latitude != -1000:
-                    print("Your position: lon = " + str(longitude) + ", lat = " + str(latitude) + ", alt = " + str(altitude))
-                    writer.writerow([time.time(),latitude,longitude,altitude])
-                    time.sleep(1.0)
+                with open(current_file, 'w') as current_file:
+                    current_writer = csv.writer(current_file)
+                    [latitude,longitude,altitude] = getPositionData(gpsd)
+                    if latitude != -1000:
+                        print("Your position: lon = " + str(longitude) + ", lat = " + str(latitude) + ", alt = " + str(altitude))
+                        current_writer.writerow([time.time(),latitude,longitude,altitude])
+                        writer.writerow([time.time(),latitude,longitude,altitude])
+                        time.sleep(interval)
         except (KeyboardInterrupt):
             running = False
             csvfile.close()
