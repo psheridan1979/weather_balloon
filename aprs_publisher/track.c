@@ -33,8 +33,11 @@ int main()
          fgets(line, MAX_LINE_LENGTH, fd );
          char *line_duplicate = strdup(line);
          const char *time = getfield(line_duplicate, 1);
+         line_duplicate = strdup(line);
          const char *lat = getfield(line_duplicate, 2);
+         line_duplicate = strdup(line);
          const char *lon = getfield(line_duplicate, 3);
+         line_duplicate = strdup(line);
          const char *alt = getfield(line_duplicate, 4);
          printf("Time: %s\n", time);
          printf("Lat: %s\n", lat);
