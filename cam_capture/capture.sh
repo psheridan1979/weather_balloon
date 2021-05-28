@@ -1,7 +1,7 @@
 #!/bin/bash
 
 path=../logs/
-time=60
+time=10
 while getopts f:t: flag
 do
     case "${flag}" in
@@ -16,7 +16,7 @@ echo "Interval: $time";
 
 while true
 do
-	DATE=$(date +"%Y-%m-%d_%H%M")
+	DATE=$(date +"%Y-%m-%d_%H%M%S")
 	fullpath=$path$DATE.jpg
 	raspistill -o $fullpath
 	echo $fullpath
