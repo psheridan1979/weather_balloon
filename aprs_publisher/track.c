@@ -41,7 +41,8 @@ int main()
          const char *alt = getfield(line_duplicate, 4);
          printf("Time: %s\n", time);
          printf("Lat: %s\n", lat);
-         printf("Time: %s\n", lon);
+         printf("Lon: %s\n", lon);
+         printf("Lon: %s\n", lon);
 
          struct TGPS GPS;
          char *ptr;
@@ -50,7 +51,7 @@ int main()
          GPS.Longitude = strtod(lon, &ptr);
          GPS.EpochTime = atoi(time);
 
-
+         if (remove(file_path) == 0)  printf("Deleted successfully");
       }
    }
    else 
