@@ -42,7 +42,8 @@ if __name__=='__main__':
                         print("Your position: lon = " + str(longitude) + ", lat = " + str(latitude) + ", alt = " + str(altitude))
                         current_writer.writerow([time.time(),latitude,longitude,altitude])
                         writer.writerow([time.time(),latitude,longitude,altitude])
-                        time.sleep(interval)
+                current_file.close()
+                time.sleep(interval)
         except (KeyboardInterrupt):
             running = False
             csvfile.close()
