@@ -47,7 +47,7 @@ int main()
                printf("Time: %s\n", time);
                printf("Lat: %s\n", lat);
                printf("Lon: %s\n", lon);
-               printf("Lon: %s\n", lon);
+               printf("Alt: %s\n", alt);
 
                struct TGPS GPS;
                char *ptr;
@@ -55,6 +55,26 @@ int main()
                GPS.Latitude = strtod(lat, &ptr);
                GPS.Longitude = strtod(lon, &ptr);
                GPS.EpochTime = atoi(time);
+               GPS.AscentRate = 0.0;
+               GPS.BatteryVoltage = 0.0;
+               GPS.BMP180Temperature = 0.0;
+               GPS.BoardCurrent = 0.0;
+               GPS.BurstLatitude = 0.0;
+               GPS.BurstLongitude = 0.0;
+               GPS.CDA = 0.0;
+               GPS.CutdownStatus = csFlightTime;
+               GPS.Direction = 0;
+               GPS.DS18B20Count = 0;
+               //GPS.DS18B20Temperature = {0.0};
+               GPS.FlightMode = fmIdle;
+               GPS.Hours = 0;
+               GPS.Minutes = 0;
+               GPS.Seconds = 0;
+               GPS.SecondsInDay = 0;
+               GPS.SecondsSinceLaunch = 0;
+
+               SendAPRS(&GPS, APRS_CALLSIGN);
+               
             }
             fclose(fd);
          }
