@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 
 #define MAX_LINE_LENGTH 80
 #define APRS_CALLSIGN "K6TMS"
@@ -59,6 +60,7 @@ int main()
          }
          if (remove(file_path) == 0)  printf("Deleted successfully\n");
          else printf("Could not delete file\n");
+         sleep(5);
       }
    return(1);
 }
