@@ -35,7 +35,7 @@ if __name__=='__main__':
             print("Application started!")
             running = True
             while running:
-                with open(current_file, 'w') as current_file:
+                with open(aprs_path, 'w') as current_file:
                     current_writer = csv.writer(current_file)
                     [latitude,longitude,altitude] = getPositionData(gpsd)
                     if latitude != -1000:
