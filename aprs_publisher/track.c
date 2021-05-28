@@ -24,12 +24,13 @@ int main()
 {
    char *file_path = "../logs/current.csv";
    FILE *fd;
-   if ((fd = fopen(file_path, "r")) != NULL)
-   {
+   
       char line[MAX_LINE_LENGTH] = {0};
 
       while(1) 
       {
+         if ((fd = fopen(file_path, "r")) != NULL)
+         {
          fgets(line, MAX_LINE_LENGTH, fd );
          char *line_duplicate = strdup(line);
          const char *time = getfield(line_duplicate, 1);
@@ -51,14 +52,11 @@ int main()
          GPS.Longitude = strtod(lon, &ptr);
          GPS.EpochTime = atoi(time);
 
-         if (remove(file_path) == 0)  printf("Deleted successfully");
+         fclose(fd);
+         if (remove(file_path) == 0)  printf("Deleted successfully\n");
+         else printf("Could not delete file\n");
+         }
       }
-   }
-   else 
-   {
-      printf("Make sure the gps logger is running");
-      exit(0);
-   }
    return(1);
 }
 
